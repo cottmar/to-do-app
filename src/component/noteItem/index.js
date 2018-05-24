@@ -31,9 +31,11 @@ export default class NoteItem extends React.Component {
 
   render() {
     return (
-      <section className="noteItem">
+     <li id={this.props.id}>
+        <h1>{this.props.title}</h1>
+        <p>{this.props.content}</p>
         <button onClick={() => this.props.handleRemoveNote(this.props.note)}>delete here</button>
-      </section>
+      </li>
     );
   }
 }

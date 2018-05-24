@@ -1,5 +1,3 @@
-// NoteList Component
-// should display an unordered list of NoteItem components
 import React from 'react';
 import NoteItem from '../noteItem';
 
@@ -10,13 +8,13 @@ export default class NoteList extends React.Component {
           <ul className="noteList">
             {
               this.props.notes.map((note) => {
-                return (
-                  <li key={note.id}>
-                  <NoteItem notes={note} handleRemoveNotes={this.props.handleRemoveNotes}/>
-                  </li>
-                );
-              })
-            }
+                return <NoteItem
+                  key={note.id}
+                  content={note.content}
+                  title={note.title}
+                  id={note.id}
+                />;
+              })}
           </ul>
       </div>
     );

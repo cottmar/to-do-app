@@ -1,5 +1,3 @@
-// NoteForm Component
-// onComplete the NoteForm should add a note to the application state
 import React from 'react';
 import autoBind from './../../utils';
 
@@ -30,7 +28,7 @@ export default class NoteForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input 
+      <input 
           type="text"
           name="title"
           placeholder="title"
@@ -43,8 +41,8 @@ export default class NoteForm extends React.Component {
           placeholder="content"
           value={this.state.content}
           onChange={this.handleChange}
-        />
-        <button type="submit">Create To Do Item</button>
+        /> 
+      <button type="submit">Create To Do Item</button>
       </form>
     );
   }

@@ -2,11 +2,7 @@ import React from 'react';
 import uuid from 'uuid/v4';
 import autoBind from '../../utils';
 import NoteForm from '../noteForm';
-
-// Dashboard Component
-// The dashboard component should manage the entire application state.
-// It should have a bound removeNote(note) method that removes a note from state.notes
-//  based on its id
+import NoteList from '../noteList/index';
 
 export default class Dashboard extends React.Component {
   constructor(props) {
@@ -20,7 +16,7 @@ export default class Dashboard extends React.Component {
     autoBind.call(this, Dashboard);
   }
 
-  handleAddNotes(notes) {
+  handleAddNote(notes) {
     if (notes.title === '') {
       return this.setState({ error: true });
     }
@@ -29,11 +25,10 @@ export default class Dashboard extends React.Component {
     }
 
     notes.createdOn = new Date();
-    notes.id = uuid();
 
     return this.setState((previousState) => {
       return {
-        notes: [...previousState.notes, notes],
+        notes: [...previousState.notes, notes, { ...notes, id: uuid() }],
         error: null, 
       };
     });
@@ -55,14 +50,10 @@ export default class Dashboard extends React.Component {
     );
   }
 
-  handleRemoveNotes(note) {
-    return this.setState((previousState) => {
-      const filterNotes = previousState.notes.filter((item) => {
-        return item.id !== note.id;
-      });
+  handleRemoveExpense(noteToRemove) {
+    this.setState((previousState) => {
       return {
-        notes: filterNotes,
-        error: null,
+        note: previousState.note.filter(note => note.id !== noteToRemove.id),
       };
     });
   }
@@ -74,10 +65,10 @@ export default class Dashboard extends React.Component {
         <NoteForm 
           handleAddNote={this.handleAddNote} 
         />
+        <NoteList
+          notes={this.state.notes}
+        />
         { this.state.error && <h2 className="error">You must enter a title.</h2> }
-        <p>Just do it.</p>
-        { this.handleNotesList(this.state) }
-        <p> All notes: { this.handleNotesList(this.state) } </p>
       </section>
     );
   }
