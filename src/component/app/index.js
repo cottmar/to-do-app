@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Dashboard from '../dashboard/index';
 import '../../styles/main.scss';
 import Landing from '../landing/index';
-import noteForm from '../noteForm';
 
 export default class App extends React.Component {
   render() {
@@ -17,7 +16,8 @@ export default class App extends React.Component {
                 <ul>
                   <li><Link to="/">Home</Link></li>
                   <li><Link to="/dashboard">Dashboard</Link></li>
-                  <li><Link to="/noteForm">Note Form</Link></li>
+                  {/* <li><Link to="/noteForm">Note Form</Link></li>
+                  <li><Link to="/noteItem">Note Item</Link></li> */}
                 </ul>
               </nav>
             </header>
@@ -30,11 +30,6 @@ export default class App extends React.Component {
               exact
               path="/dashboard"
               component={Dashboard}
-            />
-            <Route
-            exact
-            path="/noteForm"
-            component={noteForm}
             />
           </div>
         </BrowserRouter>

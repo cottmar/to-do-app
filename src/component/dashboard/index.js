@@ -1,7 +1,7 @@
 import React from 'react';
 import uuid from 'uuid/v4';
 import autoBind from '../../utils';
-import noteForm from '../noteForm';
+import NoteForm from '../noteForm';
 
 // Dashboard Component
 // The dashboard component should manage the entire application state.
@@ -14,8 +14,6 @@ export default class Dashboard extends React.Component {
 
     this.state = {
       notes: [],
-      content: '',
-      title: '',
       error: null,
     };
 
@@ -36,29 +34,51 @@ export default class Dashboard extends React.Component {
     return this.setState((previousState) => {
       return {
         notes: [...previousState.notes, notes],
-        title: '',
-        content: '',
         error: null, 
       };
     });
   }
+
+  handleNotesList() {
+    return (
+      <ul>
+        {
+          this.state.notes.map((note) => {
+            return (
+              <li key={note.id}>
+              {note.title} : {note.content}
+              </li>
+            );
+          })
+        }
+      </ul>
+    );
+  }
+
+  handleRemoveNotes(note) {
+    return this.setState((previousState) => {
+      const filterNotes = previousState.notes.filter((item) => {
+        return item.id !== note.id;
+      });
+      return {
+        notes: filterNotes,
+        error: null,
+      };
+    });
+  }
+
   render() {
     return (
       <section className="dashboard">
         <h1>Note Form</h1>
-        <noteForm 
+        <NoteForm 
           handleAddNote={this.handleAddNote} 
         />
         { this.state.error && <h2 className="error">You must enter a title.</h2> }
+        <p>Just do it.</p>
+        { this.handleNotesList(this.state) }
+        <p> All notes: { this.handleNotesList(this.state) } </p>
       </section>
     );
   }
-  // handleRemoveNotes(note) {
-    
-  //   // note is the note object which has properties. 
-  //   // compare it to the other note ids in the array in the dashboard
-  //   // have a conditional where all note ids do not match this particular note id
-  //   // filter through the array?
-  //   // filter through where a note doesn't match the unique id. 
-  // }
 }
