@@ -19,21 +19,21 @@ App
       Noteitem
 ```
 #### App
-* The app component should manage the frontend routes and have a navbar
+<!-- * The app component should manage the frontend routes and have a navbar
 * the `/` route should display the `Landing` component
-* the `/dashboard` route should display the `Dashboard` component
+* the `/dashboard` route should display the `Dashboard` component -->
 
 #### Landing
 * The landing component should display a brief description of the to do app
 
 #### Dashboard Component 
 * The dashboard component should manage the entire **application state**. 
-* The state should contain a notes array
+<!-- * The state should contain a notes array
 * It should have a bound `addNote(note)` method that adds a note to `state.notes`
   * each note that is added should have the following data
     * `id`: always should contain the result of `uuid.v1()`
     * `content`: user provided content
-    * `title`: user provided title
+    * `title`: user provided title -->
 * It should have a bound `removeNote(note)` method that removes a note from `state.notes` based on its `id`
 
 #### NoteForm Component
