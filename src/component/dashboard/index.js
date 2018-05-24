@@ -1,15 +1,10 @@
 import React from 'react';
 import uuid from 'uuid/v4';
 import autoBind from '../../utils';
+import noteForm from '../noteForm';
 
 // Dashboard Component
 // The dashboard component should manage the entire application state.
-// The state should contain a notes array
-// It should have a bound addNote(note) method that adds a note to state.notes
-// each note that is added should have the following data
-// id: always should contain the result of uuid.v1()
-// content: user provided content
-// title: user provided title
 // It should have a bound removeNote(note) method that removes a note from state.notes
 //  based on its id
 
@@ -28,7 +23,10 @@ export default class Dashboard extends React.Component {
   }
 
   handleAddNotes(notes) {
-    if (notes.title === '' && notes.content === '') {
+    if (notes.title === '') {
+      return this.setState({ error: true });
+    }
+    if (notes.content === '') {
       return this.setState({ error: true });
     }
 
@@ -38,8 +36,29 @@ export default class Dashboard extends React.Component {
     return this.setState((previousState) => {
       return {
         notes: [...previousState.notes, notes],
+        title: '',
+        content: '',
         error: null, 
       };
     });
   }
+  render() {
+    return (
+      <section className="dashboard">
+        <h1>Note Form</h1>
+        <noteForm 
+          handleAddNote={this.handleAddNote} 
+        />
+        { this.state.error && <h2 className="error">You must enter a title.</h2> }
+      </section>
+    );
+  }
+  // handleRemoveNotes(note) {
+    
+  //   // note is the note object which has properties. 
+  //   // compare it to the other note ids in the array in the dashboard
+  //   // have a conditional where all note ids do not match this particular note id
+  //   // filter through the array?
+  //   // filter through where a note doesn't match the unique id. 
+  // }
 }
